@@ -1,0 +1,40 @@
+<Start><Start>
+	<ID>1<ID>
+	<Speaker>哥布林<Speaker>
+	<Content>你好<Content>
+	<Action>0<Action>
+	<QuestID>-1<QuestID>
+	<NextID>2<NextID>
+<End><End>
+<Start><Start>
+	<ID>2<ID>
+	<Speaker>玩家<Speaker>
+	<Content>哥布林？<Content>
+	<Action>0<Action>
+	<QuestID>-1<QuestID>
+	<NextID>3,4,5<NextID>
+<End><End>
+<Start><Start>
+	<ID>3<ID>
+	<Speaker>玩家<Speaker>
+	<Content>[贸易]<Content>
+	<Action>1<Action>
+	<QuestID>-1<QuestID>
+	<NextID>-1<NextID>
+<End><End>
+<Start><Start>
+	<ID>4<ID>
+	<Speaker>玩家<Speaker>
+	<Content>[攻击]<Content>
+	<Action>0<Action>
+	<QuestID>-1<QuestID>
+	<NextID>-1<NextID>
+<End><End>
+<Start><Start>
+	<ID>5<ID>
+	<Speaker>玩家<Speaker>
+	<Content>[对话]<Content>
+	<Action>0<Action>
+	<QuestID>-1<QuestID>
+	<NextID>-1<NextID>
+<End><End>
