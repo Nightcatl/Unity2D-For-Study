@@ -2219,7 +2219,9 @@ MonoBehaviour:
     keys: []
     values: []
   equipment: []
-  craftEquipment: []
+  craftEquipment:
+  - _Data: {fileID: 11400000, guid: 47da0758c766b44468ec4e6e3ddf1f45, type: 2}
+    _StackSize: 1
   selectSlot: []
   metal: {fileID: 11400000, guid: 788495a389eb79f48bc2c72dabe70c25, type: 2}
   skin: {fileID: 11400000, guid: c5691b2d1079aef4c947d5c1a6e3192f, type: 2}
@@ -3462,6 +3464,7 @@ MonoBehaviour:
   fireballType: 0
   fireball_ExitTime: 3
   moveSpeed: 12
+  FireBall: {fileID: 11400000, guid: 474335bc3714b794a8219b02f0d4b225, type: 2}
   flameRaysPrefab: {fileID: 5591336511196132154, guid: 149a4a4895059df4087fd8b1fd1b1171, type: 3}
   flameRays_cooldown: 5
   flameRays_Damage: 0
@@ -4285,6 +4288,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 5805818705050881609}
   currency: 0
+  enemy:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!4 &1518783057
 Transform:
   m_ObjectHideFlags: 0
@@ -18201,7 +18207,6 @@ MonoBehaviour:
   NpcCandidates: []
   NPC: {fileID: 0}
   avator: {fileID: 1140581452, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-  enemies: []
   filePath: 
 --- !u!224 &5806967376655086012
 RectTransform:

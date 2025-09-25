@@ -101,6 +101,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.4
+    functionName: SetTakeDamage
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.53333336
     functionName: ReturnColor
     data: 
@@ -110,6 +117,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.53333336
     functionName: AnimationTrriger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.6
+    functionName: SetTakeDamage
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

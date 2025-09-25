@@ -8,8 +8,6 @@ public class ParticleBase : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(1);
-
         ExitTime -= Time.deltaTime;
 
         if(ExitTime < 0)

@@ -9,10 +9,10 @@ public class PlayerManager : MonoBehaviour, ISaveManager
 
     public int currency;
 
+    public LayerMask enemy;
+
     public void Awake()
     {
-        Debug.Log(1);
-
         if(instance == null)
             instance = this;
     }

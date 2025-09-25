@@ -24,10 +24,12 @@ public class LoadSceneTrigger : MonoBehaviour
             if(exitDirection.y < 0)
             {
                 if (sceneToLoad.SceneName != "")
-                    SceneSwapManager.instance.SceneSwap(sceneToLoad, false, false);
+                    SceneSwapManager.instance.SceneToLoad(sceneToLoad);
 
                 if (sceneToUnload.SceneName != "")
                     SceneManager.UnloadSceneAsync(sceneToUnload);
+
+                SceneSwapManager.instance.CurrentScene(sceneToLoad);
 
             }
         }
@@ -45,7 +47,9 @@ public class LoadSceneTrigger : MonoBehaviour
                     SceneManager.UnloadSceneAsync(sceneToLoad);
 
                 if (sceneToUnload.SceneName != "")
-                    SceneSwapManager.instance.SceneSwap(sceneToUnload, false, false);
+                    SceneSwapManager.instance.SceneToLoad(sceneToUnload);
+
+                SceneSwapManager.instance.RemoveScene(sceneToLoad);
             }
         }
     }

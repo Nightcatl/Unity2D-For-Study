@@ -11,6 +11,7 @@ public class SkillData : ScriptableObject
     public string SkillName;
 
     public AttributeType attributeType;
+    public SkillLevelType skillLevelType;
 
     public float Damage;
     public float Probability;
@@ -21,4 +22,6 @@ public class SkillData : ScriptableObject
     public float RecoveryTime;
     public float ExitTime;
     public float MoveSpeed;
+
+    public float magicPointReduce;
 }

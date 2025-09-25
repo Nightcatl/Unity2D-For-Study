@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,7 +16,7 @@ public class SceneSwapManager : MonoBehaviour, IManager
 
     [SerializeField] private SerializableDictionary<string, bool> door;
 
-    [SerializeField] private SceneField currentScene;
+    [SerializeField] private List<SceneField> currentScene;
     [SerializeField] private SceneField lastScene;
 
     private bool CanChangePlayer;
@@ -78,7 +77,7 @@ public class SceneSwapManager : MonoBehaviour, IManager
             foreach (var scene in AllScenes)
             {
                 if (scene.SceneName == CheckPointManager.instance._currentCheckPoint.sceneName)
-                    currentScene = scene;
+                    currentScene[0] = scene;
             }
         }
         else
@@ -87,7 +86,7 @@ public class SceneSwapManager : MonoBehaviour, IManager
             SceneManager.LoadScene(AllScenes[3].SceneName, LoadSceneMode.Additive);
             player.transform.position = new Vector2(-47, -8);
 
-            currentScene = AllScenes[3];
+            currentScene[0] = AllScenes[3];
         }
 
         while (CameraFollow.instance == null)
@@ -122,7 +121,7 @@ public class SceneSwapManager : MonoBehaviour, IManager
             yield return null;
         }
 
-        currentScene = AllScenes[3];
+        currentScene.Add(AllScenes[3]);
         IsSceneSwap = true;
         player.transform.position = new Vector2(-47, -8);
         UI.instance.UI_InGame.SetActive(true);
@@ -134,8 +133,16 @@ public class SceneSwapManager : MonoBehaviour, IManager
         this.CanChangePlayer = CanChangePlayer;
         this.IsSceneSwap = IsSceneSwap;
 
-        lastScene = currentScene;
-        currentScene = loadScene;
+        lastScene = currentScene[0];
+        currentScene.Remove(lastScene);
+        currentScene.Add(loadScene);
+
+        StartCoroutine(SceneSwapFor(loadScene));
+    }
+
+    public void SceneToLoad(SceneField loadScene)
+    {
+        this.CanChangePlayer = false;
 
         StartCoroutine(SceneSwapFor(loadScene));
     }
@@ -175,23 +182,23 @@ public class SceneSwapManager : MonoBehaviour, IManager
 
         if (lastScene != null || lastScene.SceneName != "")
         {
-            Debug.Log("Enter " + currentScene.SceneName);
+            Debug.Log("Enter " + currentScene[0].SceneName);
 
-            if (currentScene.SceneName == "Frost-Room" && lastScene.SceneName == "Frost-Start")
+            if (currentScene[0].SceneName == "Frost-Room" && lastScene.SceneName == "Frost-Start")
             {
                 player.transform.position = new Vector2(-6, -3);
             }
-            else if (currentScene.SceneName == "Frost-Start" && lastScene.SceneName == "Frost-Room")
+            else if (currentScene[0].SceneName == "Frost-Start" && lastScene.SceneName == "Frost-Room")
             {
                 player.transform.position = new Vector2(9, 9);
             }
-            else if(lastScene.SceneName == "Frost-Start" && currentScene.SceneName == "Cave-Start")
+            else if(lastScene.SceneName == "Frost-Start" && currentScene[0].SceneName == "Cave-Start")
             {
                 player.transform.position = new Vector2(88, -22);
             }
         }
 
-        if(lastScene.SceneName == "" && currentScene.SceneName != "")
+        if(lastScene.SceneName == "" && currentScene[0].SceneName != "")
         {
             if (CheckPointManager.instance.checkPointList.Count > 0)
                 player.transform.position = CheckPointManager.instance._currentCheckPoint.position;
@@ -208,8 +215,18 @@ public class SceneSwapManager : MonoBehaviour, IManager
                 SceneManager.UnloadSceneAsync(scene.name);
         }
 
-        currentScene = null;
+        currentScene.Clear();
         lastScene = null;
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+    }
+
+    public void CurrentScene(SceneField _currentScene)
+    {
+        currentScene.Add(_currentScene);
+    }
+
+    public void RemoveScene(SceneField _currentScene)
+    {
+        currentScene.Remove(_currentScene);
     }
 }

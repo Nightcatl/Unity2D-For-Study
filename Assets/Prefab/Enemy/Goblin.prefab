@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 3878609605911280294}
   m_Layer: 7
   m_Name: Goblin
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -330,11 +330,9 @@ MonoBehaviour:
   knockbackDuration: 0
   isKnockback: 0
   moveSpeed: 6
-  maxFallSpeed: 0
   defaultMoveSpeed: 0
-  superArmor: 0
-  invincibility: 0
   hitDir: 0
+  IsSuperArmor: 0
   IsFreeze: 0
   IsDead: 0
   IsInvincible: 0

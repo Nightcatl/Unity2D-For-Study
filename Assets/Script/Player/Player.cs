@@ -71,9 +71,11 @@ public class Player : Entity, ISaveManager
 
     [SerializeField] private Sprite avator;
 
-    [HideInInspector] public List<Enemy> enemies;
+    [HideInInspector] public HashSet<Enemy> attckedEnemies;
 
     [SerializeField] private string filePath;
+
+    private LayerMask enemyLayer;
 
     #region states
 
@@ -99,8 +101,10 @@ public class Player : Entity, ISaveManager
     {
         base.Awake();
 
+        enemyLayer = PlayerManager.instance.enemy;
+
         stateMachine = new PlayerStateMachine();
-        enemies = new List<Enemy>();
+        attckedEnemies = new HashSet<Enemy>();
     }
 
     protected override void Start()
@@ -161,10 +165,16 @@ public class Player : Entity, ISaveManager
             }
         }
 
+        if (stat.currentMagicpoint < stat.Magicpoint.GetValue())
+            stat.currentMagicpoint += 0.3f * Time.deltaTime;
+
         if (IsBusy || LevelManager.instance.busy)
             return;
 
         CameraControll();
+
+        if(takeDamage)
+            AttackTrigger();
 
         if (isKnockback)
             return;
@@ -173,8 +183,6 @@ public class Player : Entity, ISaveManager
         CheckInteraction();
         UseCheckPoint();
 
-        if (takeDamage)
-            AttackTrigger();
 
         if (rb.velocity.y <= maxFallSpeed)
             rb.velocity = new Vector2(rb.velocity.x, maxFallSpeed);
@@ -367,24 +375,40 @@ public class Player : Entity, ISaveManager
         return false;
     }
 
+    public void StartAttack()
+    {
+        InvokeRepeating("AttackTrigger", 0.1f, 0.01f);
+
+        attckedEnemies.Clear();
+    }
+
+    public void EndAttack()
+    {
+        if (IsInvoking("AttackTrigger"))
+        {
+            CancelInvoke("AttackTrigger");
+        }
+
+        attckedEnemies.Clear();
+    }
+
     private void AttackTrigger()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(attackCheck.position, attackCheckRadius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(attackCheck.position, attackCheckRadius, enemyLayer);
+
+        float Damage = stat.Damage.GetValue() * (1 + stat.Strength.GetValue() * .15f);
 
         foreach (var hit in colliders)
         {
-            if (hit.GetComponent<Enemy>() != null && !hit.GetComponent<Enemy>().IsDead)
-            {
-                if (enemies.Contains(hit.GetComponent<Enemy>()))
-                   return;
+            Enemy enemy = hit.GetComponent<Enemy>();
 
+            if (enemy != null && !enemy.IsDead && !attckedEnemies.Contains(enemy))
+            {
                 int hitDir = facingDir;
 
-                float Damage = stat.Damage.GetValue() * (1 + stat.Strength.GetValue() * .15f);
+                enemy.stat.TakeDamage(Damage, konckbackPower[attackState.comboCounter], stat.Poisedamage.GetValue(), hitDir);
 
-                hit.GetComponent<EnemyStat>().TakeDamage(Damage, konckbackPower[attackState.comboCounter], stat.Poisedamage.GetValue(), hitDir);
-
-                enemies.Add(hit.GetComponent<Enemy>());
+                attckedEnemies.Add(enemy);
             }
         }
     }

@@ -15,6 +15,15 @@ public class PlayerAnimationTrriger : MonoBehaviour
 
     private void SetTakeDamage()
     {
+        if(!player.takeDamage)
+        {
+            player.StartAttack();
+        }
+        else
+        {
+            player.EndAttack();
+        }
+
         player.takeDamage = !player.takeDamage;
     }
 

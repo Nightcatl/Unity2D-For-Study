@@ -24,6 +24,7 @@ public class Fire_Skill : Skill
     [SerializeField] private SkillLevelType fireballType;
     [SerializeField] private float fireball_ExitTime;
     [SerializeField] private float moveSpeed;
+    public SkillData FireBall;
 
     [Header("Flame Rays")]
     [SerializeField] private GameObject flameRaysPrefab;
@@ -116,6 +117,8 @@ public class Fire_Skill : Skill
 
             return;
         }
+
+        player.stat.currentMagicpoint -= FireBall.magicPointReduce;
 
         Time.timeScale = 1;
 

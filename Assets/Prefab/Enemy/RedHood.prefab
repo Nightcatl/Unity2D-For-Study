@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8173369802891747277}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: AttackCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3200764674926227523}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 519979523203067284}
   - component: {fileID: 5601472655042472469}
   - component: {fileID: 1396347879124574026}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: RedHood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,11 +194,9 @@ MonoBehaviour:
   knockbackDuration: 0
   isKnockback: 0
   moveSpeed: 10
-  maxFallSpeed: 0
   defaultMoveSpeed: 0
-  superArmor: 0
-  invincibility: 0
   hitDir: 0
+  IsSuperArmor: 0
   IsFreeze: 0
   IsDead: 0
   IsInvincible: 0
@@ -224,6 +222,7 @@ MonoBehaviour:
   SeekPlayerPrefab: {fileID: 0}
   CollideCheckPrefab: {fileID: 0}
   text: {fileID: 0}
+  bossManager: {fileID: 0}
   arrowPrefab: {fileID: 5351259012235279407, guid: 4826598ae25a9014c9f2bfbacf7d5492, type: 3}
   Left: {fileID: 0}
   Right: {fileID: 0}
@@ -330,7 +329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9009563263975152455}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: CollideCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +363,7 @@ GameObject:
   - component: {fileID: 4837313761905010190}
   - component: {fileID: 4624994822548131563}
   - component: {fileID: 2438536883815955138}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,7 +479,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2018589316034127411}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

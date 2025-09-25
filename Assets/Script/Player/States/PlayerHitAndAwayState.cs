@@ -21,8 +21,6 @@ public class PlayerHitAndAwayState : PlayerState
 
         stateTimer = player.awayDuration;
 
-        player.enemies = new List<Enemy>();
-
         jumpOnce = true ;
 
         player.attackState.comboCounter = 0;
@@ -31,8 +29,6 @@ public class PlayerHitAndAwayState : PlayerState
     public override void Exit()
     {
         base.Exit();
-
-        player.enemies = new List<Enemy>();
     }
 
     public override void Update()

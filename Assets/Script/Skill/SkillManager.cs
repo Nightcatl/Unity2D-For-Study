@@ -15,6 +15,9 @@ public class SkillManager : MonoBehaviour, ISaveManager
 
     public Thunder_Skill thunder { get; private set; }
 
+    private Dictionary<SkillType, int> skillInfoIndexMap; 
+    private Dictionary<SkillType, UI_SkillSlot> skillSlotMap;
+
     public void Awake()
     {
         if (instance == null)
@@ -42,6 +45,18 @@ public class SkillManager : MonoBehaviour, ISaveManager
                     break;
             }
         }
+
+        skillInfoIndexMap = new Dictionary<SkillType, int>();
+        for (int i = 0; i < skillInfos.Count; i++)
+        {
+            skillInfoIndexMap[skillInfos[i].skillType] = i;
+        }
+
+        skillSlotMap = new Dictionary<SkillType, UI_SkillSlot>();
+        foreach (var slot in ui_skill.SkillSLotList)
+        {
+            skillSlotMap[slot.skillType] = slot;
+        }
     }
 
     public void UpdateSkillInfos()
@@ -67,33 +82,14 @@ public class SkillManager : MonoBehaviour, ISaveManager
     {
         foreach (var skillToLoad in _data.skill)
         {
-            for (int i = 0; i < skillInfos.Count; i++)
+            if (skillInfoIndexMap.TryGetValue(skillToLoad.skillType, out int infoIndex))
             {
-                if (skillToLoad.skillType.attributeType == skillInfos[i].skillType.attributeType && skillToLoad.skillType.magicNum == skillInfos[i].skillType.magicNum)
-                {
-                        skillInfos[i] = skillToLoad;
-                }
+                skillInfos[infoIndex] = skillToLoad;
             }
 
-            for(int i = 0;i < ui_skill.SkillSLotList.Length; i++)
+            if (skillSlotMap.TryGetValue(skillToLoad.skillType, out UI_SkillSlot slot))
             {
-                if (skillToLoad.skillType.attributeType == ui_skill.SkillSLotList[i].skillType.attributeType && skillToLoad.skillType.magicNum == ui_skill.SkillSLotList[i].skillType.magicNum)
-                {
-                    ui_skill.SkillSLotList[i].levelType = skillToLoad.levelType;
-                }
-
-                /*switch (skillslot.skillType.attributeType)
-                {
-                    case AttributeType.Fire:
-                        skillslot.levelType = fire.ReturnSkillLevel(skillslot.skillType.magicNum); 
-                        break;
-                    case AttributeType.Water:
-                        skillslot.levelType = water.ReturnSkillLevel(skillslot.skillType.magicNum);
-                        break;
-                    case AttributeType.Thunder:
-                        skillslot.levelType = thunder.ReturnSkillLevel(skillslot.skillType.magicNum);
-                        break;
-                }*/
+                slot.levelType = skillToLoad.levelType;
             }
         }
     }

@@ -34,8 +34,6 @@ public class PlayerAttackState : PlayerState
             
         float attackDir = player.facingDir;
 
-        player.enemies = new List<Enemy>();
-
         player.anim.SetInteger("ComboCounter", comboCounter);
 
         if (stateMachine.lastState is not PlayerLimitMoveState && stateMachine.lastState is not PlayerAirState && stateMachine.lastState is not PlayerJumpState)
@@ -54,8 +52,6 @@ public class PlayerAttackState : PlayerState
 
         if(rb.gravityScale == 0f)
             rb.gravityScale = gravityScale;
-
-        player.enemies = new List<Enemy>();
     }
 
     public override void Update()

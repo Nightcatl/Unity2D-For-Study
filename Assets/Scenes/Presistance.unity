@@ -364,9 +364,7 @@ MonoBehaviour:
   door:
     keys: []
     values: 
-  currentScene:
-    sceneAsset: {fileID: 0}
-    sceneName: Frost-Start
+  currentScene: []
   lastScene:
     sceneAsset: {fileID: 0}
     sceneName: 

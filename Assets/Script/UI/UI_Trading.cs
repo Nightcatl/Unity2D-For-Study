@@ -97,6 +97,24 @@ public class UI_Trading : MonoBehaviour
         cart_equipmentItem.Clear();
         cart_inventoryItem.Clear();
         cart.Clear();
+
+        while (GoodsSlotParent_NPC.transform.childCount > 0)
+        {
+            Transform child = GoodsSlotParent_NPC.transform.GetChild(0);
+
+            child.SetParent(null);
+
+            Destroy(child.gameObject);
+        }
+
+        while (GoodsSlotParent_Player.transform.childCount > 0)
+        {
+            Transform child = GoodsSlotParent_Player.transform.GetChild(0);
+
+            child.SetParent(null);
+
+            Destroy(child.gameObject);
+        }
     }
 
     #region goods
@@ -419,6 +437,14 @@ public class UI_Trading : MonoBehaviour
 
     public void BuyGoods()
     {
+        if(PlayerManager.instance.currency < currentPrice)
+        {
+            Debug.Log("½ð±Ò²»¹»");
+            return;
+        }
+
+        PlayerManager.instance.currency -= currentPrice;
+
         foreach(var item in cart_equipmentItem.Keys)
         {
             if (cart_equipmentItem[item] > 0)

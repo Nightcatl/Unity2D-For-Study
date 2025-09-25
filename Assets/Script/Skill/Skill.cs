@@ -32,6 +32,16 @@ public struct SkillType
         this.attributeType = attributeType;
         this.magicNum = magicNum;
     }
+
+    public bool Equals(SkillType other)
+    {
+        return attributeType == other.attributeType && magicNum == other.magicNum;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(attributeType, magicNum);
+    }
 }
 
 [System.Serializable]

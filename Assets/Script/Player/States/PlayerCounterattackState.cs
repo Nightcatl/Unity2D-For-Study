@@ -20,15 +20,11 @@ public class PlayerCounterattackState : PlayerState
         player.ColorIndex = 0;
 
         player.StartFx(0, player.transform.position + new Vector3(-1, 0.8f, 0));
-
-        player.enemies = new List<Enemy>();
     }
 
     public override void Exit()
     {
         base.Exit();
-
-        player.enemies = new List<Enemy>();
     }
 
     public override void Update()
